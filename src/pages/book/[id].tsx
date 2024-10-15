@@ -1,3 +1,4 @@
+import { GetServerSidePropsContext } from "next";
 import style from "./[id].module.css";
 
 const mockData = {
@@ -9,6 +10,14 @@ const mockData = {
     author: "이정환",
     publisher: "프로그래밍인사이트",
     coverImgUrl: "https://shopping-phinf.pstatic.net/main_3888828/38888282618.20230913071643.jpg",
+};
+
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+    const id = context.params!.id;
+
+    return {
+        props: {},
+    };
 };
 
 export default function Page() {
