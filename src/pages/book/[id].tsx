@@ -18,6 +18,13 @@ const mockData = {
     coverImgUrl: "https://shopping-phinf.pstatic.net/main_3888828/38888282618.20230913071643.jpg",
 };
 
+export const getStaticPaths = () => {
+    return {
+        paths: [{ params: { id: "1" } }, { params: { id: "2" } }, { params: { id: "3" } }],
+        fallback: false,
+    };
+};
+
 export const getStaticProps = async (context: GetStaticPropsContext) => {
     const id = context.params!.id;
     const book = await fetchOneBook(Number(id));
