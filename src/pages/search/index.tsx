@@ -24,6 +24,7 @@ export default function Page() {
 
     const fetchSearchResult = async () => {
         const data = await fetchBooks(q as string);
+        setBooks(data);
     };
 
     useEffect(() => {
