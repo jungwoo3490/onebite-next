@@ -1,5 +1,7 @@
+import { ReviewData } from "@/types";
 import style from "./page.module.css";
 import { createReviewAction } from "@/actions/create-review.action";
+import ReviewItem from "@/components/review-item";
 
 export function generateStaticParams() {
     return [{ id: "1" }, { id: "2" }, { id: "3" }];
@@ -44,11 +46,30 @@ function ReviewEditor({ bookId }: { bookId: string }) {
     );
 }
 
+async function ReviewList({ bookId }: { bookId: string }) {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/review/book/${bookId}}`);
+
+    if (!response.ok) {
+        throw new Error(`Review fetch failed : ${response.statusText}`);
+    }
+
+    const reviews: ReviewData[] = await response.json();
+
+    return (
+        <section>
+            {reviews.map((review) => (
+                <ReviewItem key={`review-item-${review.id}`} {...review} />
+            ))}
+        </section>
+    );
+}
+
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
     return (
         <div className={style.container}>
             <BookDetail bookId={(await params).id} />
             <ReviewEditor bookId={(await params).id} />
+            <ReviewList bookId={(await params).id} />
         </div>
     );
 }
