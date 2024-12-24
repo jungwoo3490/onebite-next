@@ -26,7 +26,7 @@ async function SearchResult({ q }: { q: string }) {
     );
 }
 
-export async function generateMetadata({ searchParams }: { searchParams: { q?: string } }): Promise<Metadata> {
+export function generateMetadata({ searchParams }: { searchParams: { q?: string } }): Metadata {
     // 현재 페이지 메타데이터를 동적으로 생성하는 역할
     const { q } = searchParams;
     return {
