@@ -40,7 +40,13 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
     };
 }
 
-export default function Page({ searchParams }: { searchParams: any }) {
+export default function Page({
+    searchParams,
+}: {
+    searchParams: {
+        q?: string;
+    };
+}) {
     return (
         <Suspense key={searchParams.q || ""} fallback={<BookListSkeleton count={3} />}>
             <SearchResult q={searchParams.q || ""} />
