@@ -13,5 +13,5 @@ export interface ReviewData {
     content: string;
     author: string;
     createdAt: string;
-    bookId: number;
+    bookId: string;
 }
